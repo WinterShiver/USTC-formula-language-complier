@@ -6,7 +6,7 @@
 
 ![test_effect](fig/test_effect.png)
 
-**求Star！**
+⭐**求Star！**
 
 文件说明：
 
