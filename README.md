@@ -6,6 +6,8 @@
 
 ![test_effect](fig/test_effect.png)
 
+**求Star！**
+
 文件说明：
 
 * readme.pdf是这个项目的要求。为了优化输出公式的视觉效果，在要求的基础上做了一点修改。
