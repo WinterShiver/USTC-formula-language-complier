@@ -2,9 +2,9 @@
 
 本项目是中科大信院编译原理课程的课程实验的Haskell实现，将LaTeX语法的公式文本渲染成HTML. 
 
-![run](https://gitee.com//WinterShiver/myimgs/raw/master/img/20200516191750.png)
+![run](fig/run.png)
 
-![test_effect](https://gitee.com//WinterShiver/myimgs/raw/master/img/20200516191758.png)
+![test_effect](fig/test_effect.png)
 
 文件说明：
 
