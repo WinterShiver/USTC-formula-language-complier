@@ -2,7 +2,7 @@
 
 本项目是中科大信院编译原理课程的课程实验的Haskell实现，将LaTeX语法的公式文本渲染成HTML. 
 
-![test_effect](fig/test_effect.png)
+![test_effect](https://github.com/WinterShiver/USTC-formula-language-complier/raw/master/fig/test_effect.png)
 
 ⭐**求Star！**
 
@@ -17,9 +17,9 @@
 
 在交互命令行运行：如图，进入`/code`目录，进入`ghci`环境，`:l Main`加载Main模块，`main`执行Main模块的main函数。
 
-![run](fig/run.png)
+![run](https://github.com/WinterShiver/USTC-formula-language-complier/raw/master/fig/run.png)
 
 编译并运行：进入`/code`目录，`ghc Main.hs && ./Main`
 
-![compile](fig/compile.png)
+![compile](https://github.com/WinterShiver/USTC-formula-language-complier/raw/master/fig/compile.png)
 
