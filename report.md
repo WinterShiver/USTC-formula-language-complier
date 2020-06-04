@@ -14,7 +14,7 @@
 S -> $B$
 B -> B1B | B1
 B1 -> B2Bm | B2
-  Bm -> B'Bm | e
+  Bm -> B'Bm | B'
   B' -> _^{B} | ^{B} | _{B}
 B2 -> \int{B}{B}{B} | \sum{B}{B}{B} | id | num | \blank | (B)
 ```
@@ -110,7 +110,7 @@ b pos = do {
 
 ## 非终结符B1：上标、下标、上下标的处理
 
-B1的作用是匹配“带有上下标的公式”，而B2的作用是匹配“不带上下标的公式”。按照语法规则，Bm匹配“零个或多个上下标”，B1要么匹配一个B2和一个Bm，要么匹配一个B2. 
+B1的作用是匹配“带有上下标的公式”，而B2的作用是匹配“不带上下标的公式”。按照语法规则，Bm匹配“一个或多个上下标”，B1要么匹配一个B2和一个Bm，要么匹配一个B2. 
 
 B1的实现细节和B很相似，没什么难的。
 
@@ -127,7 +127,7 @@ b1 pos = do {
 }
 ```
 
-Bm匹配“零个或多个上下标”，递归地写成“匹配一个B'后匹配Bm，或匹配一个空串”。如果是前者，后匹配的Bm以前面B'的输出位置为起始位置即可，后匹配Bm的输出位置为最终的输出位置；如果是后者，ParseResult中语法记号列表为空，把输入位置作为输出位置即可。
+Bm匹配“一个或多个上下标”，递归地写成“匹配一个B'后匹配Bm，或匹配一个B'”。如果是前者，后匹配的Bm以前面B'的输出位置为起始位置即可，后匹配Bm的输出位置为最终的输出位置；如果是后者，和上面类似。
 
 ```haskell
 -- FormulaParser.hs
@@ -136,7 +136,10 @@ bm pos = do {
     ParseResult lexes' nextPos' <- b' pos;
     ParseResult lexesm nextPosm <- bm nextPos';
     return $ ParseResult (lexes'++lexesm) nextPosm
-} <|> (return $ ParseResult [] pos)
+} <|> do {
+    pr' <- b' pos;
+    return pr'
+}
 ```
 
 ### 非终结符B'：上标下标的位置变换

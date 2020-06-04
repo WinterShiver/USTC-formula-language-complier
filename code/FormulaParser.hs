@@ -10,7 +10,7 @@ import Pos
 --   S -> $B$
 --   B -> B1B | B1
 --   B1 -> B2Bm | B2
---     in which Bm -> B'Bm | e
+--     in which Bm -> B'Bm | B'
 --              B' -> _^{B} | ^{B} | _{B}
 --   B2 -> \int{B}{B}{B} | \sum{B}{B}{B} | id | num | \blank | (B)
 -- Note: tolerant all spaces
@@ -93,14 +93,27 @@ b1_2 pos = do {
     return pr2
 }
 
--- bm: Bm -> B'Bm | e
+-- bm: Bm -> B'Bm | B'
 
 bm :: Pos -> Parser ParseResult
-bm pos = do {
+bm pos = bm_1 pos <|> bm_2 pos
+
+-- bm_1: Bm -> B'Bm
+
+bm_1 :: Pos -> Parser ParseResult
+bm_1 pos = do {
     ParseResult lexes' nextPos' <- b' pos;
     ParseResult lexesm nextPosm <- bm nextPos';
     return $ ParseResult (lexes'++lexesm) nextPosm
-} <|> (return $ ParseResult [] pos)
+}
+
+-- bm_2: Bm -> B'
+
+bm_2 :: Pos -> Parser ParseResult
+bm_2 pos = do {
+    pr' <- b' pos;
+    return pr'
+}
 
 -- b': B' -> _^{B} | ^{B} | _{B}
 
